@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iranian Menu</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+        }
+        
+        .menu-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(128,0,128,0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .selector-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: stretch;
+        }
+        
+        .weight-section {
+            flex: 1;
+        }
+        
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        select {
+            width: 100%;
+            padding: 16px 20px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: #800080;
+            background: #fafafa;
+            border: 2px dashed #ccc;
+            border-radius: 12px;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23800080' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        select:hover {
+            border-color: #800080;
+            background-color: #f5f0f5;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: #800080;
+            border-style: solid;
+            box-shadow: 0 0 0 3px rgba(128,0,128,0.1);
+        }
+        
+        .price-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .price-display {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8f0f8 0%, #f0e8f0 100%);
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .price-display.updating {
+            animation: pulse 0.3s ease;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: #800080;
+            transition: all 0.3s ease;
+        }
+        
+        .illustration {
+            width: 100%;
+            height: 200px;
+            margin: 30px 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><defs><linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23f5f5f0;stop-opacity:1" /><stop offset="100%" style="stop-color:%23e0e0d0;stop-opacity:1" /></linearGradient></defs><ellipse cx="200" cy="250" rx="80" ry="15" fill="%23d0d0c0" opacity="0.5"/><path d="M150 200 Q120 180 140 150 Q130 120 160 110 Q180 80 220 90 Q260 70 280 110 Q320 120 310 160 Q330 190 300 210 Q280 240 240 230 Q200 250 150 200" fill="url(%23cloudGrad)" stroke="%23b0b0a0" stroke-width="2"/><circle cx="280" cy="100" r="3" fill="%23b0b0a0"/><circle cx="300" cy="80" r="2" fill="%23b0b0a0"/><circle cx="320" cy="120" r="4" fill="%23b0b0a0"/><circle cx="340" cy="90" r="2" fill="%23b0b0a0"/><path d="M180 140 Q190 130 200 140" fill="none" stroke="%23666" stroke-width="2" stroke-linecap="round"/><path d="M220 140 Q230 130 240 140" fill="none" stroke="%23666" stroke-width="2" stroke-linecap="round"/></svg>') center/contain no-repeat;
+            opacity: 0.6;
+        }
+        
+        .surcharge {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            text-align: center;
+            letter-spacing: 1px;
+            padding: 15px;
+            background: #f5f5f0;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .per-gram {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .cloud-decoration {
+            position: absolute;
+            width: 100px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(128,0,128,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(20px);
+        }
+        
+        .cloud-1 { top: 20px; right: 20px; }
+        .cloud-2 { bottom: 100px; left: 10px; width: 80px; height: 40px; }
+    </style>
+</head>
+<body>
+    <div class="menu-card">
+        <div class="cloud-decoration cloud-1"></div>
+        <div class="cloud-decoration cloud-2"></div>
+        
+        <h1>IRANIAN</h1>
+        
+        <div class="selector-container">
+            <div class="weight-section">
+                <div class="section-label">Select Weight</div>
+                <select id="weightSelect">
+                    <option value="20" data-price="23.00">20G</option>
+                    <option value="50" data-price="19.00">50G</option>
+                    <option value="100" data-price="14.00">100G</option>
+                </select>
+            </div>
+            
+            <div class="price-section">
+                <div class="section-label">Price</div>
+                <div class="price-display" id="priceDisplay">
+                    <div class="price" id="priceValue">£23.00</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="illustration"></div>
+        
+        <div class="surcharge">£10 POSTAGE SURCHARGE</div>
+        <div class="per-gram" id="perGram">£1.15 per gram</div>
+    </div>
+
+    <script>
+        const weightSelect = document.getElementById('weightSelect');
+        const priceValue = document.getElementById('priceValue');
+        const priceDisplay = document.getElementById('priceDisplay');
+        const perGram = document.getElementById('perGram');
+        
+        const prices = {
+            20: 23.00,
+            50: 19.00,
+            100: 14.00
+        };
+        
+        weightSelect.addEventListener('change', function() {
+            const selectedWeight = parseInt(this.value);
+            const newPrice = prices[selectedWeight];
+            
+            // Animate price change
+            priceDisplay.classList.add('updating');
+            
+            setTimeout(() => {
+                priceValue.textContent = `£${newPrice.toFixed(2)}`;
+                
+                // Calculate per gram
+                const perGramPrice = (newPrice / selectedWeight).toFixed(2);
+                perGram.textContent = `£${perGramPrice} per gram`;
+                
+                priceDisplay.classList.remove('updating');
+            }, 150);
+        });
+        
+        // Initialize per gram calculation
+        const initialWeight = parseInt(weightSelect.value);
+        const initialPerGram = (prices[initialWeight] / initialWeight).toFixed(2);
+        perGram.textContent = `£${initialPerGram} per gram`;
+    </script>
+</body>
+</html>
